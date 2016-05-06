@@ -7,11 +7,39 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "InputCollector.h"
+#import "Dice.h"
+#import "GameController.h"
+
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        
+        GameController *gameController = [[GameController alloc] init];
+
+        inputCollector *input = [[inputCollector alloc] init];
+        
+        while (YES) {
+            
+            NSString *userInput = [input inputForPrompt:@"What Would you like to Do?"];
+            
+            
+            if ([userInput isEqualToString:@"quit"]) {
+                break;
+            } else if ([userInput isEqualToString:@"roll"]) {
+
+                [gameController rollDice];
+            }
+            if ([userInput isEqualToString:@"hold"]){
+                NSString *usableSelection = [input inputForPrompt:@"Which Dice would you like to Hold?: "];
+                [gameController holdDie:[usableSelection intValue]];
+            
+            }if ([userInput isEqualToString:@"reset"]){
+                [gameController resetDice];
+            }
+            
+        }
+        
     }
     return 0;
 }
